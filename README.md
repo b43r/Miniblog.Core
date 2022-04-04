@@ -1,22 +1,6 @@
-# Blog engine for ASP.NET Core 3.1
+# Mads Kristensen's Blog engine ported to .NET 6.0
 
-A full-featured yet simple blog engine built on ASP.NET Core 3.1.
-
-Please be aware that [Mads is taking pull requests, but is not actively working on it](https://github.com/madskristensen/Miniblog.Core/issues/159#issuecomment-765629584).
-
-[![Build status](https://ci.appveyor.com/api/projects/status/lwjrlpvmhg50wwbs?svg=true)](https://ci.appveyor.com/project/madskristensen/miniblog-core)
-[![NuGet](https://img.shields.io/nuget/v/MadsKristensen.AspNetCore.Miniblog.svg)](https://nuget.org/packages/MadsKristensen.AspNetCore.Miniblog/)
-
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
-
-**Live demo**: <https://miniblogcore.azurewebsites.net/>  
-Username: *demo*  
-Password: *demo*
-
-![Editor](art/editor.png)
-
-### Custom themes
-In search for custom designed themes for MiniBlog.Core? [Click here](https://francis.bio/miniblog-themes/).
+A full-featured yet simple blog engine.
 
 ## Features
 - Windows/Open Live Writer support
@@ -66,25 +50,6 @@ You can embed any youtube video by using the following syntax in the source of a
 ```
 
 *ScXvuavqhzo* is the ID of the YouTube video which can be found in any YouTube link looking this *youtube.com/watch?v=**ScXvuavqhzo***
-
-## How to use
-On the command line, install the template.
-
-```cmd
-dotnet new --install MadsKristensen.AspNetCore.Miniblog
-```
-
-Then create it into any folder.
-
-```cmd
-dotnet new miniblog
-```
-
-Then run it or open it in Visual Studio or your favorite code editor.
-
-```cmd
-dotnet run
-```
 
 ## Credits
 SVG icons by <https://simpleicons.org/>
