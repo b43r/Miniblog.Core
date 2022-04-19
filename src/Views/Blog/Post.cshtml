@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Mvc.RazorPages
 @model Post
 @inject IOptionsSnapshot<BlogSettings> settings
 @{
@@ -14,7 +15,7 @@
 
 <article class="post container" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
-        <h1 itemprop="name headline"><a href="@Model.GetLink()" rel="canonical" itemprop="url">@Model.Title</a></h1>
+        <h1 itemprop="name headline"><a href="@Url.Content("~" + Model.GetLink())" rel="canonical" itemprop="url">@Model.Title</a></h1>
         <time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Published @Model.PubDate.ToString("MMM d, yyyy")</time>
         @if (User.Identity.IsAuthenticated)
         {
@@ -71,14 +72,14 @@
 				<path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z" fill="gray"></path>
 				<path d="M0 0h24v24H0z" fill="none"></path>
 			</svg>
-			<a href="@Model.GetLink()#comments" itemprop="discussionUrl" title="Go to the comments section">
+			<a href="@Url.Content("~" + Model.GetLink())#comments" itemprop="discussionUrl" title="Go to the comments section">
 				<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "comment" : "comments")
 			</a>
 		}
 
 		<meta itemprop="author" content="@settings.Value.Owner" />
 		<meta itemprop="dateModified" content="@Model.LastModified.ToString("s")" />
-		<meta itemprop="mainEntityOfPage" content="@(host + Model.GetLink())" />
+		<meta itemprop="mainEntityOfPage" content="@(host + Url.Content("~" + Model.GetLink()))" />
 	</footer>
 </article>
 

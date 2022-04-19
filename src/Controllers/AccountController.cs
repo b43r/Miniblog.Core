@@ -62,7 +62,7 @@ namespace Miniblog.Core.Controllers
         public async Task<IActionResult> LogOutAsync()
         {
             await this.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).ConfigureAwait(false);
-            return this.LocalRedirect("/");
+            return this.LocalRedirect("~/");
         }
     }
 }

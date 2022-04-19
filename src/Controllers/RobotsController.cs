@@ -33,56 +33,6 @@ namespace Miniblog.Core.Controllers
             this.manifest = manifest;
         }
 
-        [Route("/robots.txt")]
-        [OutputCache(Profile = "default")]
-        public string RobotsTxt()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("User-agent: *")
-                .AppendLine("Disallow:")
-                .Append("sitemap: ")
-                .Append(this.Request.Scheme)
-                .Append("://")
-                .Append(this.Request.Host)
-                .AppendLine("/sitemap.xml");
-
-            return sb.ToString();
-        }
-
-        [Route("/rsd.xml")]
-        public void RsdXml()
-        {
-            EnableHttpBodySyncIO();
-
-            var host = $"{this.Request.Scheme}://{this.Request.Host}";
-
-            this.Response.ContentType = "application/xml";
-            this.Response.Headers["cache-control"] = "no-cache, no-store, must-revalidate";
-
-            using var xml = XmlWriter.Create(this.Response.Body, new XmlWriterSettings { Indent = true });
-            xml.WriteStartDocument();
-            xml.WriteStartElement("rsd");
-            xml.WriteAttributeString("version", "1.0");
-
-            xml.WriteStartElement("service");
-
-            xml.WriteElementString("enginename", "Miniblog.Core");
-            xml.WriteElementString("enginelink", "http://github.com/madskristensen/Miniblog.Core/");
-            xml.WriteElementString("homepagelink", host);
-
-            xml.WriteStartElement("apis");
-            xml.WriteStartElement("api");
-            xml.WriteAttributeString("name", "MetaWeblog");
-            xml.WriteAttributeString("preferred", "true");
-            xml.WriteAttributeString("apilink", $"{host}/metaweblog");
-            xml.WriteAttributeString("blogid", "1");
-
-            xml.WriteEndElement(); // api
-            xml.WriteEndElement(); // apis
-            xml.WriteEndElement(); // service
-            xml.WriteEndElement(); // rsd
-        }
-
         [Route("/feed/{type}")]
         public async Task Rss(string type)
         {
@@ -106,7 +56,7 @@ namespace Miniblog.Core.Controllers
                 {
                     Title = post.Title,
                     Description = post.Content,
-                    Id = host + post.GetLink(),
+                    Id = host + Url.Content("~" + post.GetLink()),
                     Published = post.PubDate,
                     LastUpdated = post.LastModified,
                     ContentType = "html",
@@ -148,7 +98,7 @@ namespace Miniblog.Core.Controllers
                 var lastMod = new[] { post.PubDate, post.LastModified };
 
                 xml.WriteStartElement("url");
-                xml.WriteElementString("loc", host + post.GetLink());
+                xml.WriteElementString("loc", host + Url.Content("~" + post.GetLink()));
                 xml.WriteElementString("lastmod", lastMod.Max().ToString("yyyy-MM-ddThh:mmzzz", CultureInfo.InvariantCulture));
                 xml.WriteEndElement();
             }

@@ -68,7 +68,7 @@
                 autoresize_min_height: 200,
                 plugins: 'autosave preview searchreplace visualchars image link media fullscreen code codesample table hr pagebreak autoresize nonbreaking anchor insertdatetime advlist lists textcolor wordcount imagetools colorpicker',
                 menubar: "edit view format insert table",
-                toolbar1: 'formatselect | bold italic blockquote forecolor backcolor | imageupload link | alignleft aligncenter alignright  | numlist bullist outdent indent | fullscreen',
+                toolbar1: 'formatselect | bold italic blockquote forecolor backcolor | imageupload link codesample | alignleft aligncenter alignright  | numlist bullist | fullscreen',
                 selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
                 autoresize_bottom_margin: 0,
                 paste_data_images: true,
@@ -77,6 +77,13 @@
                 relative_urls: false,
                 convert_urls: false,
                 branding: false,
+                codesample_languages: [
+                    { text: 'HTML/XML', value: 'markup' },
+                    { text: 'JavaScript', value: 'javascript' },
+                    { text: 'CSS', value: 'css' },
+                    { text: 'C#', value: 'csharp' },
+                    { text: 'SQL', value: 'sql' }
+                ],
 
                 setup: function (editor) {
                     editor.addButton('imageupload', {

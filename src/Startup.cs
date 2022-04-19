@@ -16,10 +16,7 @@ namespace Miniblog.Core
     using WebMarkupMin.AspNetCore6;
     using WebMarkupMin.Core;
 
-    using WilderMinds.MetaWeblog;
-
     using IWmmLogger = WebMarkupMin.Core.Loggers.ILogger;
-    using MetaWeblogService = Miniblog.Core.Services.MetaWeblogService;
     using WmmNullLogger = WebMarkupMin.Core.Loggers.NullLogger;
 
     public class Startup
@@ -71,7 +68,6 @@ namespace Miniblog.Core
                 app.UseHttpsRedirection();
             }
 
-            app.UseMetaWeblog("/metaweblog");
             app.UseAuthentication();
 
             app.UseOutputCaching();
@@ -98,7 +94,6 @@ namespace Miniblog.Core
             services.AddSingleton<IBlogService, FileBlogService>();
             services.Configure<BlogSettings>(this.Configuration.GetSection("blog"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddMetaWeblog<MetaWeblogService>();
 
             // Progressive Web Apps https://github.com/madskristensen/WebEssentials.AspNetCore.ServiceWorker
             services.AddProgressiveWebApp(

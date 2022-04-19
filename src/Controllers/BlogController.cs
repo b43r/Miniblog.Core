@@ -10,6 +10,7 @@ namespace Miniblog.Core.Controllers
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Net;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Xml;
@@ -65,7 +66,7 @@ namespace Miniblog.Core.Controllers
                 await this.blog.SavePost(post).ConfigureAwait(false);
             }
 
-            return this.Redirect($"{post.GetEncodedLink()}#{comment.ID}");
+            return Redirect(Url.RouteUrl(new { action = nameof(Post), slug = post.Slug }) + "#comments");
         }
 
         [Route("/blog/category/{category}/{page:int?}")]
@@ -84,8 +85,8 @@ namespace Miniblog.Core.Controllers
             this.ViewData[Constants.TotalPostCount] = await posts.CountAsync().ConfigureAwait(true);
             this.ViewData[Constants.Title] = $"{this.manifest.Name} {category}";
             this.ViewData[Constants.Description] = $"Articles posted in the {category} category";
-            this.ViewData[Constants.prev] = $"/blog/category/{category}/{page + 1}/";
-            this.ViewData[Constants.next] = $"/blog/category/{category}/{(page <= 1 ? null : page - 1 + "/")}";
+            this.ViewData[Constants.prev] = $"/blog/category/{WebUtility.UrlEncode(category)}/{page + 1}/";
+            this.ViewData[Constants.next] = $"/blog/category/{WebUtility.UrlEncode(category)}/{(page <= 1 ? null : page - 1 + "/")}";
             return this.View("~/Views/Blog/Index.cshtml", filteredPosts.AsAsyncEnumerable());
         }
 
@@ -105,8 +106,8 @@ namespace Miniblog.Core.Controllers
             this.ViewData[Constants.TotalPostCount] = await posts.CountAsync().ConfigureAwait(true);
             this.ViewData[Constants.Title] = $"{this.manifest.Name} {tag}";
             this.ViewData[Constants.Description] = $"Articles posted in the {tag} tag";
-            this.ViewData[Constants.prev] = $"/blog/tag/{tag}/{page + 1}/";
-            this.ViewData[Constants.next] = $"/blog/tag/{tag}/{(page <= 1 ? null : page - 1 + "/")}";
+            this.ViewData[Constants.prev] = $"/blog/tag/{WebUtility.UrlEncode(tag)}/{page + 1}/";
+            this.ViewData[Constants.next] = $"/blog/tag/{WebUtility.UrlEncode(tag)}/{(page <= 1 ? null : page - 1 + "/")}";
             return this.View("~/Views/Blog/Index.cshtml", filteredPosts.AsAsyncEnumerable());
         }
 
@@ -131,7 +132,7 @@ namespace Miniblog.Core.Controllers
             post.Comments.Remove(comment);
             await this.blog.SavePost(post).ConfigureAwait(false);
 
-            return this.Redirect($"{post.GetEncodedLink()}#comments");
+            return Redirect(Url.RouteUrl(new { action = nameof(Post), slug = post.Slug }) + "#comments");
         }
 
         [Route("/blog/deletepost/{id}")]
@@ -145,7 +146,7 @@ namespace Miniblog.Core.Controllers
             }
 
             await this.blog.DeletePost(existing).ConfigureAwait(false);
-            return this.Redirect("/");
+            return this.Redirect(Url.Content("~/"));
         }
 
         [Route("/blog/edit/{id?}")]
@@ -204,7 +205,7 @@ namespace Miniblog.Core.Controllers
         /// <remarks>This is for redirecting potential existing URLs from the old Miniblog URL format.</remarks>
         [Route("/post/{slug}")]
         [HttpGet]
-        public IActionResult Redirects(string slug) => this.LocalRedirectPermanent($"/blog/{slug}");
+        public IActionResult Redirects(string slug) => this.LocalRedirectPermanent($"~/blog/{slug}");
 
         [Route("/blog/{slug?}")]
         [HttpPost, Authorize, AutoValidateAntiforgeryToken]
@@ -245,7 +246,7 @@ namespace Miniblog.Core.Controllers
 
             await this.blog.SavePost(existing).ConfigureAwait(false);
 
-            return this.Redirect(post.GetEncodedLink());
+            return RedirectToAction(nameof(Post), new { slug = post.Slug });
         }
 
         private async Task SaveFilesToDisk(Post post)

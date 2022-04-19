@@ -1,4 +1,4 @@
-﻿@model IAsyncEnumerable<Post>
+@model IAsyncEnumerable<Post>
 @inject IOptionsSnapshot<BlogSettings> settings
 @{
     int currentPage = int.Parse(ViewContext.RouteData.Values[Constants.page] as string ?? "0");
@@ -17,22 +17,22 @@
 <nav class="pagination container" aria-label="Pagination">
     @if ((await Model.AnyAsync()) && currentPage < totalPages)
     {
-        <a rel="prev" href="@ViewData[Constants.prev]" title="Older posts">&laquo; Older</a>
+        <a rel="prev" href="@Url.Content("~" + ViewData[Constants.prev])" title="Older posts">&laquo; Older</a>
     }
     @if (currentPage > 0)
     {
-        <a rel="next" href="@ViewData[Constants.next]" title="Newer posts">Newer &raquo;</a>
+        <a rel="next" href="@Url.Content("~" + ViewData[Constants.next])" title="Newer posts">Newer &raquo;</a>
     }
     <br /><br />
 
     @section Head {
         @if ((await Model.AnyAsync()) && currentPage < totalPages)
         {
-            <link rel="prev" href="@ViewData[Constants.prev]" />
+            <link rel="prev" href="@Url.Content("~" + ViewData[Constants.prev])" />
         }
         @if (currentPage > 0)
         {
-            <link rel="next" href="@ViewData[Constants.next]" />
+            <link rel="next" href="@Url.Content("~" + ViewData[Constants.next])" />
         }
     }
 </nav>
