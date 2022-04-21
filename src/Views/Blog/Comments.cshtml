@@ -1,15 +1,15 @@
-﻿@model Post
+@model Post
 @inject IOptionsSnapshot<BlogSettings> settings
 
 <section id="comments">
     <div class="container">
-        <h2>Comments</h2>
+        <h2>Kommentare</h2>
         @foreach (var comment in Model.Comments)
         {
             <article id="@comment.ID" class="@(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
                 <h3>
                     <time datetime="@comment.PubDate.ToString("s")" itemprop="datePublished">
-                        <a href="#@comment.ID" title="Permalink (#@comment.ID)">@comment.PubDate.ToString("MMMM d, yyyy")</a>
+                        <a href="#@comment.ID" title="Permalink (#@comment.ID)">@comment.PubDate.ToString("dd.MM.yyyy")</a>
                     </time>
                 </h3>
 
@@ -23,8 +23,8 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="noline" href="mailto:@comment.Email" title="Send email to @comment.Email">&#x2709;</a>
-                        <a class="delete noline" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.ID" asp-route-commentid="@comment.ID" asp-route-afrt="@ViewData["afrt"]" title="Delete the comment...">Delete...</a>
+                        <a class="noline" href="mailto:@comment.Email" title="E-Mail an @comment.Email senden">&#x2709;</a>
+                        <a class="delete noline" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.ID" asp-route-commentid="@comment.ID" asp-route-afrt="@ViewData["afrt"]" title="Kommentar löschen...">Löschen...</a>
                     }
                 </div>
             </article>
@@ -34,25 +34,25 @@
         {
             if (Model.Comments.Count == 0)
             {
-                <p>Be the first to post a comment</p>
+                <p>Schreibe den ersten Kommentar!</p>
             }
 
             <form method="post" asp-controller="Blog" asp-action="AddComment" asp-route-postid="@Model.ID" asp-antiforgery="false">
-                <h3>Post a comment</h3>
+                <h3>Kommentar schreiben</h3>
                 <br />
 
-                <label for="content">Comment</label>
-                <textarea id="content" name="content" rows="5" cols="100" onfocus="" required placeholder="Enter your comment here..."></textarea>
+                <label for="content">Kommentar</label>
+                <textarea id="content" name="content" rows="5" cols="100" onfocus="" required placeholder="Kommentar hier eingeben..."></textarea>
 
                 <div class="details">
                     <label for="author">Name</label>
-                    <input id="author" name="author" placeholder="Your name" required />
+                    <input id="author" name="author" placeholder="dein Name" required />
 
-                    <label for="email">E-mail</label>
-                    <input id="email" name="email" placeholder="Example: mary@outlook.com" required />
+                    <label for="email">E-Mail</label>
+                    <input id="email" name="email" placeholder="Beispiel: mary@outlook.com" required />
                     <br />
 
-                    <input type="submit" value="Post comment" />
+                    <input type="submit" value="Kommentar absenden" />
 
                     <!-- This element is being removed by site.js. It is to prevent comment spam-->
                     <input type="hidden" name="website" />
@@ -61,13 +61,13 @@
 
             <noscript>
                 <br />
-                <p>Enable JavaScript to post comments on this blog.</p>
+                <p>JavaScript muss aktiviert sein um Kommentare zu erfassen.</p>
             </noscript>
         }
         else
         {
             <br />
-            <p>Comments are closed</p>
+            <p>Kommentare sind geschlossen.</p>
         }
     </div>
 </section>

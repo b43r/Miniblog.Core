@@ -12,23 +12,23 @@
 }
 
     <form method="post" id="edit" class="container" asp-controller="Blog" asp-action="UpdatePost">
-        <div asp-validation-summary="All"></div>
+        <div asp-validation-summary="All" style="margin-bottom: 10px"></div>
         <input type="hidden" asp-for="@Model.ID" />
 
-        <label asp-for="@Model.Title" class="label">Title</label>
-        <input asp-for="@Model.Title" required placeholder="Title of blog post" aria-describedby="desc_title" />
-        <span class="desc" id="desc_title">The title as it appears on the website</span>
+        <label asp-for="@Model.Title" class="label">Titel</label>
+        <input asp-for="@Model.Title" required placeholder="Titel des Posts" aria-describedby="desc_title" />
+        <span class="desc" id="desc_title">Titel wie er auf der Webseite angezeigt wird.</span>
         <br />
 
         <label asp-for="@Model.Slug" class="label">Slug</label>
-        <input asp-for="@Model.Slug" placeholder="The URL name" aria-describedby="desc_slug" />
-        <span class="desc" id="desc_slug">The part of the URL that identifies this blog post</span>
+        <input asp-for="@Model.Slug" placeholder="URL" aria-describedby="desc_slug" />
+        <span class="desc" id="desc_slug">Eindeutiger Teil der URL - wird automatisch gesetzt wenn leer.</span>
         <br />
 
-        <label for="categories" class="label">Categories</label>
+        <label for="categories" class="label">Kategorien</label>
         <input type="text" name="selectcat" id="selectcat" aria-describedby="desc_categories" list="catlist" placeholder="@string.Join(", ", Model.Categories)"  />
         <input type="text" name="categories" id="categories" value="@string.Join(", ", Model.Categories)" hidden />
-        <span class="desc" id="desc_categories">Select, or build a comma separated list of keywords - to remove double the keyword</span>
+        <span class="desc" id="desc_categories">Kommagetrennte Liste von Schlüsselwörtern - um eines zu entfernen das Word verdoppeln.</span>
         <datalist id="catlist">
             @foreach (var cat in allCats)
             {
@@ -40,7 +40,7 @@
         <label for="tags" class="label">Tags</label>
         <input type="text" name="selecttag" id="selecttag" aria-describedby="desc_tags" list="taglist" placeholder="@string.Join(", ", Model.Tags)"  />
         <input type="text" name="tags" id="tags" value="@string.Join(", ", Model.Tags)" hidden />
-        <span class="desc" id="desc_tags">Select, or build a comma separated list of keywords - to remove double the keyword</span>
+        <span class="desc" id="desc_tags">Kommagetrennte Liste von Tags - um eines zu entfernen das Word verdoppeln.</span>
         <datalist id="taglist">
             @foreach (var tag in allTags)
             {
@@ -49,22 +49,23 @@
             </datalist>
         <br />
 
-        <label asp-for="@Model.Excerpt" class="label">Excerpt</label>
-        <textarea asp-for="@Model.Excerpt" rows="3" placeholder="Short description of blog post" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
-        <span class="desc" id="desc_excerpt">A brief description of the content of the post</span>
+        <label asp-for="@Model.Excerpt" class="label">Auszug</label>
+        <textarea asp-for="@Model.Excerpt" rows="3" placeholder="Eine kurze Beschreibung des Inhalts" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
+        <span class="desc" id="desc_excerpt">Eine kurze Beschreibung des Inhalts.</span>
         <br />
 
         <textarea asp-for="@Model.Content" rows="20" aria-label="Content">@Model.Content</textarea>
         <br />
 
-        <input type="submit" value="Save" title="Save the post" />
+        <input type="submit" value="Speichern" title="Beitrag speichern" />
+		<input type="submit" class="cancel" value="Abbrechen" asp-action="CancelEdit" asp-route-id="@Model.ID" formnovalidate="formnovalidate" />
 
         <input asp-for="@Model.IsPublished" />
-        <label asp-for="@Model.IsPublished">Is published</label>
+        <label asp-for="@Model.IsPublished">veröffentlichen</label>
 
         @if (!isNew)
         {
-            <input type="submit" value="Delete..." class="delete" title="Delete the post..." asp-action="DeletePost" asp-route-id="@Model.ID" />
+            <input type="submit" value="Löschen..." class="delete" title="diesen Beitrag löschen..." asp-action="DeletePost" asp-route-id="@Model.ID" />
         }
     </form>
 

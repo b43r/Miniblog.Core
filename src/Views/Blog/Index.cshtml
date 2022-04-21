@@ -9,6 +9,17 @@
     int totalPages = (totalPosts / this.settings.Value.PostsPerPage) - (totalPosts % this.settings.Value.PostsPerPage == 0 ? 1 : 0);
 }
 
+<nav class="pagination container" aria-label="Pagination">
+    @if ((await Model.AnyAsync()) && currentPage < totalPages)
+    {
+        <a rel="prev" href="@Url.Content("~" + ViewData[Constants.prev])" title="Ältere Beiträge anzeigen">&laquo; Ältere Beiträge</a>
+    }
+    @if (currentPage > 0)
+    {
+        <a rel="next" href="@Url.Content("~" + ViewData[Constants.next])" title="Neuere Beiträge anzeigen">Neuere Beiträge &raquo;</a>
+    }
+</nav>
+
 @await foreach (var post in Model)
 {
     await Html.RenderPartialAsync("Post.cshtml", post);
@@ -17,11 +28,11 @@
 <nav class="pagination container" aria-label="Pagination">
     @if ((await Model.AnyAsync()) && currentPage < totalPages)
     {
-        <a rel="prev" href="@Url.Content("~" + ViewData[Constants.prev])" title="Older posts">&laquo; Older</a>
+        <a rel="prev" href="@Url.Content("~" + ViewData[Constants.prev])" title="Ältere Beiträge anzeigen">&laquo; Ältere Beiträge</a>
     }
     @if (currentPage > 0)
     {
-        <a rel="next" href="@Url.Content("~" + ViewData[Constants.next])" title="Newer posts">Newer &raquo;</a>
+        <a rel="next" href="@Url.Content("~" + ViewData[Constants.next])" title="Neuere Beiträge anzeigen">Neuere Beiträge &raquo;</a>
     }
     <br /><br />
 

@@ -1,7 +1,7 @@
 {
-  "name": "Miniblog.Core",
-  "short_name": "Miniblog.Core",
-  "description": "A short description of the blog.",
+  "name": "Code Blog",
+  "short_name": "Code Blog",
+  "description": "Coding Tipps & Tricks",
   "icons": [
     {
       "src": "/img/icon192x192.png",

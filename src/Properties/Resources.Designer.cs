@@ -19,7 +19,7 @@ namespace Miniblog.Core.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -115,7 +115,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New post.
+        ///   Looks up a localized string similar to Neuer Beitrag.
         /// </summary>
         public static string NewPost {
             get {
@@ -133,7 +133,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Page not found.
+        ///   Looks up a localized string similar to Seite nicht gefunden.
         /// </summary>
         public static string PageNotFound {
             get {
@@ -151,7 +151,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign in.
+        ///   Looks up a localized string similar to Anmelden.
         /// </summary>
         public static string SignIn {
             get {
@@ -160,7 +160,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign in as administrator.
+        ///   Looks up a localized string similar to als Administrator anmelden.
         /// </summary>
         public static string SignInAsAdministrator {
             get {
@@ -169,7 +169,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign in to the website.
+        ///   Looks up a localized string similar to bei Webseite anmelden.
         /// </summary>
         public static string SignInToTheWebsite {
             get {
@@ -178,7 +178,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign out.
+        ///   Looks up a localized string similar to Abmelden.
         /// </summary>
         public static string SignOut {
             get {
@@ -187,7 +187,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign out as administrator.
+        ///   Looks up a localized string similar to als Administrator abmelden.
         /// </summary>
         public static string SignOutAsAdministrator {
             get {
@@ -241,7 +241,7 @@ namespace Miniblog.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username or password is invalid..
+        ///   Looks up a localized string similar to Benutzername oder Password ungültig..
         /// </summary>
         public static string UsernameOrPasswordIsInvalid {
             get {

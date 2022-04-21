@@ -93,6 +93,7 @@ namespace Miniblog.Core
             services.AddSingleton<IUserServices, BlogUserServices>();
             services.AddSingleton<IBlogService, FileBlogService>();
             services.Configure<BlogSettings>(this.Configuration.GetSection("blog"));
+            services.Configure<GoogleSettings>(this.Configuration.GetSection("google"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Progressive Web Apps https://github.com/madskristensen/WebEssentials.AspNetCore.ServiceWorker

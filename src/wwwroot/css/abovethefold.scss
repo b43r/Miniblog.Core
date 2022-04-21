@@ -31,17 +31,19 @@ body {
 }
 
 .siteheader {
-    text-align: right;
-    padding: .8em 1.5em 2em 1.5em;
+    width: 100%;
+    height: 32px;
+    background-color: #555555;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
 
-    p {
-        font-size: 2em;
-    }
-
-    a {
-        color: $text_color;
-        text-decoration: none;
-    }
+.siteheader a div {
+    background: url(../../img/dcdlogo.png) no-repeat;
+    width: 52px;
+    height: 32px;
+    margin-left: 20px;
 }
 
 @keyframes fade-in {
@@ -56,6 +58,7 @@ body {
 
 main {
     animation: fade-in 1s ease;
+    padding-top: 48px;
 }
 
 b, strong {

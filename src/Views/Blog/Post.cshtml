@@ -13,13 +13,19 @@
     <link rel="canonical" href="@(host + Model.GetLink())" />
 }
 
+@if (showFullPost) {
+<nav class="pagination container" aria-label="Pagination">
+	<a rel="prev" href="@Url.Content("~/")" title="Zurück zur Übersicht">Zurück</a>
+</nav>
+}
+
 <article class="post container" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <header>
         <h1 itemprop="name headline"><a href="@Url.Content("~" + Model.GetLink())" rel="canonical" itemprop="url">@Model.Title</a></h1>
-        <time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Published @Model.PubDate.ToString("MMM d, yyyy")</time>
+        <time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Veröffentlicht am @Model.PubDate.ToString("dd.MM.yyyy")</time>
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-controller="Blog" asp-action="edit" asp-route-id="@Model.ID" title="Edit the post">Edit post</a>
+            <a asp-controller="Blog" asp-action="edit" asp-route-id="@Model.ID" title="diesen Beitrag bearbeiten">bearbeiten</a>
         }
     </header>
 
@@ -38,7 +44,7 @@
 		@if (Model.Categories.Any())
 		{
 			<svg width="24" height="24" aria-hidden="true" role="img" aria-labelledby="_cats-@Model.ID" focusable="false" viewBox="0 0 24 24">
-				<title id="_cats-@Model.ID">Categories</title>
+				<title id="_cats-@Model.ID">Kategorien</title>
 				<path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" fill="gray"></path>
 				<path d="M0 0h24v24H0z" fill="none"></path>
 			</svg>
@@ -68,12 +74,12 @@
 		@if (settings.Value.DisplayComments)
 		{
 			<svg width="24" height="24" aria-hidden="true" role="img" aria-labelledby="_comments-@Model.ID" focusable="false" viewBox="0 0 24 24">
-				<title id="_comments-@Model.ID">Comments</title>
+				<title id="_comments-@Model.ID">Kommentare</title>
 				<path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z" fill="gray"></path>
 				<path d="M0 0h24v24H0z" fill="none"></path>
 			</svg>
-			<a href="@Url.Content("~" + Model.GetLink())#comments" itemprop="discussionUrl" title="Go to the comments section">
-				<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "comment" : "comments")
+			<a href="@Url.Content("~" + Model.GetLink())#comments" itemprop="discussionUrl" title="Kommentare anzeigen">
+				<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "Kommentar" : "Kommentare")
 			</a>
 		}
 

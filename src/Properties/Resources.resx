@@ -136,31 +136,31 @@
     <value>Miniblog.Core</value>
   </data>
   <data name="NewPost" xml:space="preserve">
-    <value>New post</value>
+    <value>Neuer Beitrag</value>
   </data>
   <data name="Offline" xml:space="preserve">
     <value>Offline</value>
   </data>
   <data name="PageNotFound" xml:space="preserve">
-    <value>Page not found</value>
+    <value>Seite nicht gefunden</value>
   </data>
   <data name="PoweredBy" xml:space="preserve">
     <value>Powered by</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Anmelden</value>
   </data>
   <data name="SignInAsAdministrator" xml:space="preserve">
-    <value>Sign in as administrator</value>
+    <value>als Administrator anmelden</value>
   </data>
   <data name="SignInToTheWebsite" xml:space="preserve">
-    <value>Sign in to the website</value>
+    <value>bei Webseite anmelden</value>
   </data>
   <data name="SignOut" xml:space="preserve">
-    <value>Sign out</value>
+    <value>Abmelden</value>
   </data>
   <data name="SignOutAsAdministrator" xml:space="preserve">
-    <value>Sign out as administrator</value>
+    <value>als Administrator abmelden</value>
   </data>
   <data name="SomeFeaturesOfThisWebsiteDoNotWorkAsExpectedWhenJavaScriptIsDisabled" xml:space="preserve">
     <value>Some features of this website do not work as expected when JavaScript is disabled</value>
@@ -178,6 +178,6 @@
     <value>Unauthorized</value>
   </data>
   <data name="UsernameOrPasswordIsInvalid" xml:space="preserve">
-    <value>Username or password is invalid.</value>
+    <value>Benutzername oder Password ungültig.</value>
   </data>
 </root>

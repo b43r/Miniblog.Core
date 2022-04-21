@@ -1,4 +1,4 @@
-﻿@model LoginViewModel
+@model LoginViewModel
 @{
     ViewData[Constants.Title] = Miniblog.Core.Properties.Resources.Login;
     ViewData[Constants.Description] = Miniblog.Core.Properties.Resources.SignInToTheWebsite;
@@ -11,14 +11,14 @@
 <form method="post" id="login" aria-labelledby="legend" asp-route-returnUrl="@ViewData[Constants.ReturnUrl]">
     <div asp-validation-summary="All"></div>
     <fieldset>
-        <legend id="legend">Sign in</legend>
+        <legend id="legend">Anmelden</legend>
 
-        <input asp-for="UserName" aria-label="Username" autofocus required placeholder="Username" />
-        <input asp-for="Password" aria-label="Password" required placeholder="Password" />
+        <input asp-for="UserName" aria-label="Username" autofocus required placeholder="Benutzername" />
+        <input asp-for="Password" aria-label="Password" required placeholder="Passwort" />
 
         <input asp-for="RememberMe" />
-        <label asp-for="RememberMe">Remember me</label>
+        <label asp-for="RememberMe">angemeldet bleiben</label>
 
-        <input type="submit" value="Sign in" />
+        <input type="submit" value="Anmelden" />
     </fieldset>
 </form>

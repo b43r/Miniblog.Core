@@ -105,7 +105,7 @@
         var deleteButton = edit.querySelector(".delete");
         if (deleteButton) {
             deleteButton.addEventListener("click", function (e) {
-                if (!confirm("Are you sure you want to delete the post?")) {
+                if (!confirm("Beitrag wirklich löschen?")) {
                     e.preventDefault();
                 }
             });
@@ -119,7 +119,7 @@
             var link = deleteLinks[i];
 
             link.addEventListener("click", function (e) {
-                if (!confirm("Are you sure you want to delete the comment?")) {
+                if (!confirm("Kommentar wirklich löschen?")) {
                     e.preventDefault();
                 }
             });
