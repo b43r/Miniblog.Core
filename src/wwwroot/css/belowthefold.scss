@@ -108,6 +108,12 @@ noscript p {
     }
 }
 
+.filter svg {
+    position: relative;
+    top: 4px;
+    margin-left: 10px;
+}
+
 .sitefooter {
     position: absolute;
     bottom: 0;

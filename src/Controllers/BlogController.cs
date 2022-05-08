@@ -87,6 +87,7 @@ namespace Miniblog.Core.Controllers
             this.ViewData[Constants.Description] = $"Articles posted in the {category} category";
             this.ViewData[Constants.prev] = $"/blog/category/{WebUtility.UrlEncode(category)}/{page + 1}/";
             this.ViewData[Constants.next] = $"/blog/category/{WebUtility.UrlEncode(category)}/{(page <= 1 ? null : page - 1 + "/")}";
+            this.ViewData[Constants.CatFilter] = category;
             return this.View("~/Views/Blog/Index.cshtml", filteredPosts.AsAsyncEnumerable());
         }
 
@@ -108,6 +109,7 @@ namespace Miniblog.Core.Controllers
             this.ViewData[Constants.Description] = $"Articles posted in the {tag} tag";
             this.ViewData[Constants.prev] = $"/blog/tag/{WebUtility.UrlEncode(tag)}/{page + 1}/";
             this.ViewData[Constants.next] = $"/blog/tag/{WebUtility.UrlEncode(tag)}/{(page <= 1 ? null : page - 1 + "/")}";
+            this.ViewData[Constants.TagFilter] = tag;
             return this.View("~/Views/Blog/Index.cshtml", filteredPosts.AsAsyncEnumerable());
         }
 
@@ -293,30 +295,43 @@ namespace Miniblog.Core.Controllers
                 var srcNode = img.Attributes["src"];
                 var fileNameNode = img.Attributes["data-filename"];
 
-                // The HTML editor creates base64 DataURIs which we'll have to convert to image
-                // files on disk
-                if (srcNode is null || fileNameNode is null)
+                if (srcNode is null)
                 {
                     continue;
                 }
 
-                var extension = System.IO.Path.GetExtension(fileNameNode.Value);
+                // The HTML editor creates base64 DataURIs which we'll have to convert to image files on disk
+                var base64Match = base64Regex.Match(srcNode.Value);
+                if (!base64Match.Success)
+                {
+                    continue;
+                }
+
+                string extension;
+                string fileName;
+                if (fileNameNode is null)
+                {
+                    // if an image has been pasted into the editor, it has no data-filename attribute!
+                    extension = "." + base64Match.Groups["ext"].Value;
+                    fileName = "pastedImage" + extension;
+                }
+                else
+                {
+                    extension = System.IO.Path.GetExtension(fileNameNode.Value);
+                    fileName = fileNameNode.Value;
+                }                
 
                 // Only accept image files
                 if (!allowedExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
                 {
                     continue;
                 }
+                
+                var bytes = Convert.FromBase64String(base64Match.Groups["base64"].Value);
+                srcNode.Value = await this.blog.SaveFile(bytes, fileName).ConfigureAwait(false);
 
-                var base64Match = base64Regex.Match(srcNode.Value);
-                if (base64Match.Success)
-                {
-                    var bytes = Convert.FromBase64String(base64Match.Groups["base64"].Value);
-                    srcNode.Value = await this.blog.SaveFile(bytes, fileNameNode.Value).ConfigureAwait(false);
-
-                    img.Attributes.Remove(fileNameNode);
-                    post.Content = post.Content.Replace(match.Value, img.OuterXml, StringComparison.OrdinalIgnoreCase);
-                }
+                img.Attributes.Remove(fileNameNode);
+                post.Content = post.Content.Replace(match.Value, img.OuterXml, StringComparison.OrdinalIgnoreCase);
             }
         }
     }

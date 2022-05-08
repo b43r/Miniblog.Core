@@ -46,6 +46,17 @@ body {
     margin-left: 20px;
 }
 
+.siteheader a {
+    float: left;
+}
+
+.siteheader > div {
+    float: right;
+    height: 26px;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
 @keyframes fade-in {
     from {
         opacity: 0;

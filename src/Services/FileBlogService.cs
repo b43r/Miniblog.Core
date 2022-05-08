@@ -197,8 +197,8 @@ namespace Miniblog.Core.Services
             {
                 await writer.WriteAsync(bytes, 0, bytes.Length).ConfigureAwait(false);
             }
-
-            return $"/{POSTS}/{FILES}/{fileNameWithSuffix}";
+            
+            return $"{this.contextAccessor.HttpContext?.Request?.PathBase}/{POSTS}/{FILES}/{fileNameWithSuffix}";
         }
 
         public async Task SavePost(Post post)
