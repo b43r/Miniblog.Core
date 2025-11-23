@@ -1,5 +1,8 @@
 namespace Miniblog.Core
 {
+    using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+    using JavaScriptEngineSwitcher.V8;
+
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -8,6 +11,7 @@ namespace Miniblog.Core
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
 
     using Miniblog.Core.Services;
 
@@ -138,6 +142,12 @@ namespace Miniblog.Core
                         options.MinificationSettings.WhitespaceMinificationMode = WhitespaceMinificationMode.Safe;
                     });
             services.AddSingleton<IWmmLogger, WmmNullLogger>(); // Used by HTML minifier
+
+            services.AddJsEngineSwitcher(options =>
+            {
+                options.AllowCurrentProperty = false;
+                options.DefaultEngineName = V8JsEngine.EngineName;
+            }).AddV8();
 
             // Bundling, minification and Sass transpilation (https://github.com/ligershark/WebOptimizer)
             services.AddWebOptimizer(
