@@ -1,4 +1,4 @@
-# Mads Kristensen's Blog engine ported to .NET 6.0
+# Mads Kristensen's Blog engine ported to .NET 10.0
 
 A full-featured yet simple blog engine.
 
